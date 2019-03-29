@@ -5,8 +5,10 @@ using namespace std;
 
 long long int cycles(unordered_map<long long int,long long int> &arr,long long int num){
 	long long int cont=0;
-	if(num==1)
-		return 1;
+	if(num==1){
+		arr[1]=1;
+		return arr[1];
+	}
 	if(arr.count(num)!=0)
 		return arr[num];
 	if(num & 1)
@@ -23,12 +25,12 @@ int main(int argc, char *argv[]) {
 	unordered_map<long long int,long long int> arr;
 	for(long long int i=1;i<1000000;i++)
 		long long aux=cycles(arr,i);
-		
-	arr[1]=1;
+			
 	while(cin>>i>>j){
 		long long int maxi=0;
-		long long int ini=i>j?j:i;
-		long long int fin=i<j?j:i;
+		long long int ini=i,fin=j;
+		if(i>j)
+			ini=j,fin=i;
 		for(long long int k=ini;k<=fin;k++){
 			if(arr[k]>maxi)
 				maxi=arr[k];
